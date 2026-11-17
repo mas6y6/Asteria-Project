@@ -18,9 +18,6 @@ sourceSets.main.resources {
     exclude("src/generated/**/.cache")
 }
 
-repositories {
-}
-
 base {
     archivesName = mod_id
 }
@@ -70,9 +67,15 @@ configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
-dependencies {
+repositories {
+    maven { url = "https://maven.firstdark.dev/snapshots" } // LDLib2, KilaGraph, Photon
 }
 
+dependencies {
+    implementation("com.lowdragmc.ldlib2:ldlib2-neoforge-${minecraft_version}:${ldlib2_version}")
+    implementation("com.lowdragmc.photon:photon-neoforge-${minecraft_version}:${photon_version}")
+    implementation("com.lowdragmc.kilagraph:kilagraph-neoforge-${minecraft_version}:${kilagraph_version}")
+}
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [
             minecraft_version      : minecraft_version,
